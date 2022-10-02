@@ -17,7 +17,7 @@ const FormSearchMovies = ({ onSubmit }) => {
     e.preventDefault();
 
     if(searchQuery.trim() === '' ) {
-      toast.error('Please enter a word to search for images!')
+      toast.error('Please enter a word to search for movies!')
       return;
     }
     
