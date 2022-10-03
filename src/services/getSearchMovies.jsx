@@ -14,8 +14,12 @@ const getSearchQueryMovies = async ({ query = '', page = 1}) => {
     
 }
 
-const api = {
-    getSearchQueryMovies
+const getMoviesDetails = async ( movieId ) => {
+    const {response} = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${KEY}&language=en-US`)
+    return response;
 }
 
-export { getSearchTrendingMovies, api };
+
+
+
+export { getSearchTrendingMovies, getSearchQueryMovies, getMoviesDetails };
