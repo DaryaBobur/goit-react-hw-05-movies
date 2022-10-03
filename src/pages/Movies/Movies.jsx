@@ -2,11 +2,11 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AppBar from "components/AppBar/AppBar";
 import FormSearchMovies from "components/FormSearchMovies/FormSearchMovies";
-import { api } from "services/getSearchMovies";
+import { getSearchQueryMovies } from "services/getSearchMovies";
 import TrendingMoviesItem from "components/TrendingMoviesItem/TrendingMoviesItem";
 import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 import Loader from "components/Loader/Loader";
-
+import MovieDetails from "components/MovieDetails/MovieDetails";
 
 
 
@@ -21,7 +21,7 @@ const Movies = () => {
     const onChangeQuery = query => {
       setQuery(query);
       setPage(1);
-      setItems([])
+      setItems([]);
     };
 
     useEffect(() => {
@@ -34,13 +34,16 @@ const Movies = () => {
     
           try {
             setIsLoading(true);
-            const data = await api.getSearchQueryMovies(params);
+            const data = await getSearchQueryMovies(params);
     
-            // setItems((prevItems) => {
-            //     // console.log({...prevItems, ...prevItems.data.results})
-            // //   return {...prevItems, ...data.results}
+            // setItems(() => {
+            //     console.log(data)
+            //     // if(prevItems){
+            //     //   return [...prevItems, ...data]
+            //     // }
+            //   // return 
             // })
-            setItems(data)
+            setItems(data);
             } 
             catch (error) {
               setError(error);
@@ -66,6 +69,7 @@ const Movies = () => {
         <FormSearchMovies onSubmit={onChangeQuery}/>
         {items.length !== 0 && <TrendingMoviesItem items={items} />}
         {items.length !== 0 && <ButtonLoadMore onClick={loadMore} />}
+        <MovieDetails />
         {isLoading && <Loader/>}
         {error && <p>Please try again later!</p>}
         <Outlet/>
