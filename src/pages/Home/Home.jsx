@@ -4,7 +4,7 @@ import AppBar from "components/AppBar/AppBar";
 import Loader from "components/Loader/Loader";
 import { getSearchTrendingMovies } from "services/getSearchMovies";
 import TrendingMoviesItem from "components/TrendingMoviesItem/TrendingMoviesItem";
-
+import MovieDetails from "components/MovieDetails/MovieDetails";
 const Home = () => {
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +33,7 @@ const Home = () => {
             {items.length !== 0 && <TrendingMoviesItem items={items}/>}
             {isLoading && <Loader/>}
             {error && <p>Please try again later!</p>}
+            {items.length !== 0 && <MovieDetails items={items}/>}
             <Outlet />
         </>
     )
