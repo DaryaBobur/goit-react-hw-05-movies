@@ -5,8 +5,8 @@ const TrendingMoviesItem = ({ items }) => {
 return (
     <ul>
         {item.map(({title, id}) => (
-        <li  key={id}>
-        <NavLink><h2>{title}</h2></NavLink>
+        <li key={id}>
+        <NavLink to={`${id}`}><h2>{title}</h2></NavLink>
         </li>
         ))} 
     </ul>
