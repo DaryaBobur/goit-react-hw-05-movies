@@ -12,6 +12,7 @@ import MovieDetails from "components/MovieDetails/MovieDetails";
 
 
 const Movies = () => {
+
     const [items, setItems] = useState([]);
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
@@ -35,15 +36,8 @@ const Movies = () => {
           try {
             setIsLoading(true);
             const data = await getSearchQueryMovies(params);
-    
-            // setItems(() => {
-            //     console.log(data)
-            //     // if(prevItems){
-            //     //   return [...prevItems, ...data]
-            //     // }
-            //   // return 
-            // })
-            setItems(data);
+            setItems(data)       
+
             } 
             catch (error) {
               setError(error);
@@ -69,7 +63,7 @@ const Movies = () => {
         <FormSearchMovies onSubmit={onChangeQuery}/>
         {items.length !== 0 && <TrendingMoviesItem items={items} />}
         {items.length !== 0 && <ButtonLoadMore onClick={loadMore} />}
-        <MovieDetails />
+         <MovieDetails/>
         {isLoading && <Loader/>}
         {error && <p>Please try again later!</p>}
         <Outlet/>

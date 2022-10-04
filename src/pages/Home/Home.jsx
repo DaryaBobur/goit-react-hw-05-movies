@@ -17,7 +17,8 @@ const Home = () => {
             try {
                const data = await getSearchTrendingMovies();
                setItems(data);
-            } catch (error) {
+               
+        } catch (error) {
                 setError(error)
             } finally {
                 setIsLoading(false);
@@ -33,7 +34,7 @@ const Home = () => {
             {items.length !== 0 && <TrendingMoviesItem items={items}/>}
             {isLoading && <Loader/>}
             {error && <p>Please try again later!</p>}
-            {items.length !== 0 && <MovieDetails items={items}/>}
+            <MovieDetails/>
             <Outlet />
         </>
     )

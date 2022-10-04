@@ -1,49 +1,44 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMoviesDetails } from 'services/getSearchMovies';
+// import MovieDetailsItem from 'components/MovieDetailsItem/MovieDetailsItem';
 
 
-
-const MovieDetails = ({items}) => {
-const { movieId } = useParams();
+const MovieDetails = () => {
+    
 const [movie, setMovie] = useState(null);
+const [error, setError] = useState(null);
+const { movieId } = useParams();
 
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+
+// const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 useEffect(()=> {
+   
     const fetchMovie = async () => {
+        if(!movieId) {
+            return;
+        }
         try {
-          const movie = await getMoviesDetails(movieId);
-          setMovie(movie);
-    console.log(movieId)
-
+          const data = await getMoviesDetails(movieId);
+          setMovie(data);
+    console.log(data)
         } catch (error) {
-            console.log(error)
+            setError(error)
         }
     }
-    fetchMovie()
+    fetchMovie();
 }, [movieId])
 
-if(!movie) {
-    return;
-}
 
-
+// console.log(movieId)
+// const {title} = movie;
 return (
-<>
-{items.data.results.map(({title, poster_path, overwiew})=> (
-<>
-<h2>{title}</h2>
-<img src={IMG_BASE_URL/poster_path} alt="" />
-<p>User store: </p>
-<h3>Overwiew</h3>
-<p>{overwiew}</p>
+    <>
+{movie && <h2>{movie.title}</h2>}
+{error && <p>Please try again later!</p>}
 </>
-))}
-
-</>
-
-
 )
 
 

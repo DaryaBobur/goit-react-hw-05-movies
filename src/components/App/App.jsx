@@ -4,17 +4,21 @@ import Movies from "pages/Movies/Movies";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MovieDetails from "components/MovieDetails/MovieDetails";
-
+import Layout from "components/Layout/Layout";
 
 const App = () => {
   return (
     <>
   <Routes>
-    <Route path="/" element={<Home />}/>
-    <Route path="/:movieId" element={<MovieDetails />}/>
+    <Route path="/" element={<Layout />}/>
+    <Route index element={<Home />}/>
+    <Route path=":movieId" element={<MovieDetails />}/>
+    {/* <Route path=":movieId" element={<div>hello</div>}/> */}
 
 
    <Route path="movies" element={<Movies />}/>
+   {/* <Route path="movies/:movieId" element={<div>hello friend</div>}/> */}
+
     <Route path="movies/:movieId" element={<MovieDetails />}/>
   </Routes>
   
