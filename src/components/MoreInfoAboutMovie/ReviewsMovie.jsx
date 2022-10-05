@@ -29,7 +29,7 @@ const ReviewsMovie = () => {
     review.data.results.map(({author, content, id}) => (
         <div key={author}>
             <p><b>Author: {author} </b></p>
-            <p>{content === [] ? content : "no"}</p>
+            <p>{content}</p>
         </div>
     ))
   )
