@@ -14,8 +14,18 @@ export const getSearchQueryMovies = async ({ query = '', page = 1}) => {
     
 }
 
-export const getMoviesDetails = async ( movieId ) => {
-    const {response} = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${KEY}&language=en-US`)
+export const getMoviesDetails = async ( {movieId} ) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}?api_key=${KEY}&language=en-US`)
     return response;
 }
 
+
+export const getCastMovie = async ({movieId}) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits?api_key=${KEY}`)
+    return response;
+}
+
+export const getReviewsMovie = async ({movieId}) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews?api_key=${KEY}&language=en-US&page=1`)
+    return response;
+}
