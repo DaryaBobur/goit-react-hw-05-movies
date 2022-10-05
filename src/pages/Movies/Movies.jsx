@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import AppBar from "components/AppBar/AppBar";
 import FormSearchMovies from "components/FormSearchMovies/FormSearchMovies";
 import { getSearchQueryMovies } from "services/getSearchMovies";
-import TrendingMoviesItem from "components/TrendingMoviesItem/TrendingMoviesItem";
+import MoviesList from "components/MoviesListTrending/MoviesListTrending";
 import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 import Loader from "components/Loader/Loader";
-import MovieDetails from "components/MovieDetails/MovieDetails";
+import MovieDetails from "pages/MovieDetails/MovieDetails";
 
 
 
@@ -32,12 +32,12 @@ const Movies = () => {
           if(!query) {
             return;
           }      
+          setIsLoading(true);
     
           try {
-            setIsLoading(true);
             const data = await getSearchQueryMovies(params);
-            setItems(data)       
-
+            console.log(data)
+            setItems(prev => [...prev, ...data.data.results])
             } 
             catch (error) {
               setError(error);
@@ -61,7 +61,7 @@ const Movies = () => {
         <>
         <AppBar/>
         <FormSearchMovies onSubmit={onChangeQuery}/>
-        {items.length !== 0 && <TrendingMoviesItem items={items} />}
+        {items.length !== 0 && <MoviesList items={items} />}
         {items.length !== 0 && <ButtonLoadMore onClick={loadMore} />}
          <MovieDetails/>
         {isLoading && <Loader/>}
