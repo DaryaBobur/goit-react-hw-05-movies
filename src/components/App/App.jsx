@@ -1,41 +1,38 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "pages/Home/Home";
 import Movies from "pages/Movies/Movies";
+import MovieDetails from "pages/MovieDetails/MovieDetails";
+import Layout from "components/Layout/Layout";
+import CastMovie from "components/MoreInfoAboutMovie/CastMovie";
+import ReviewsMovie from "components/MoreInfoAboutMovie/ReviewsMovie";
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MovieDetails from "components/MovieDetails/MovieDetails";
-import Layout from "components/Layout/Layout";
 
 const App = () => {
   return (
     <>
-  <Routes>
-    <Route path="/" element={<Layout />}/>
-    <Route index element={<Home />}/>
-    <Route path=":movieId" element={<MovieDetails />}/>
-    {/* <Route path=":movieId" element={<div>hello</div>}/> */}
-
-
-   <Route path="movies" element={<Movies />}/>
-   {/* <Route path="movies/:movieId" element={<div>hello friend</div>}/> */}
-
-    <Route path="movies/:movieId" element={<MovieDetails />}/>
-  </Routes>
-  
-  <ToastContainer 
-        autoClose={3000} 
-        theme={'colored'}
-      />
+        <Routes>
+            <Route path="/" element={<Layout />}/>
+            <Route index element={<Home />}/>
+            <Route path=":movieId" element={<MovieDetails />}>
+              <Route path="cast" element={<CastMovie />}/>
+              <Route path="reviews" element={<ReviewsMovie />}/>
+            </Route>
+            <Route path="/movies" element={<Movies />}/>
+            <Route path="movies/:movieId" element={<MovieDetails />}>
+              <Route path="cast" element={<CastMovie />}/>
+              <Route path="reviews" element={<ReviewsMovie />}/>
+            </Route>
+            <Route path="*" element={<Home />} />
+        </Routes>
+          
+        <ToastContainer 
+          autoClose={3000} 
+          theme={'colored'}
+        />
     </>
   );
 };
 
 export default App;
-
-
-
-// '/' – компонент Home, домашня сторінка зі списком популярних кінофільмів.
-// '/movies' – компонент Movies, сторінка пошуку кінофільмів за ключовим словом.
-// '/movies/:movieId' – компонент MovieDetails, сторінка з детальною інформацією про кінофільм.
-// /movies/:movieId/cast – компонент Cast, інформація про акторський склад. Рендериться на сторінці MovieDetails.
-// /movies/:movieId/reviews – компонент Reviews, інформація про огляди. Рендериться на сторінці MovieDetails.
