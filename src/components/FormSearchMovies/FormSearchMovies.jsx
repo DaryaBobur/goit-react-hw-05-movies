@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 
 const FormSearchMovies = ({ onSubmit }) => {
 
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchQuery = e => {
     setSearchQuery(e.currentTarget.value.toLowerCase().trim());
