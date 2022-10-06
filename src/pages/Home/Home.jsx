@@ -22,7 +22,6 @@ const Home = () => {
             try {
                 setItems(prev => ([...prev]))
                const data = await getSearchTrendingMovies();
-               console.log(data)
                setItems(data);
             
         } catch (error) {
