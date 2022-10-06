@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
@@ -8,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 const FormSearchMovies = ({ onSubmit }) => {
 
   const [searchQuery, setSearchQuery] = useState('');
+
 
   const handleSearchQuery = e => {
     setSearchQuery(e.currentTarget.value.toLowerCase().trim());
