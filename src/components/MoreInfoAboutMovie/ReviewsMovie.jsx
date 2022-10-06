@@ -22,21 +22,20 @@ const ReviewsMovie = () => {
             }
             fetchReviewsMovie();
         }, [movieId]);
-// console.log(review.data)
 
         return (
-  review && (
+            <>
+{review && review.data.total_pages === 0 && "We don't have any reviews for this movie!"}
+{review && (
     review.data.results.map(({author, content}) => (
         <div key={author}>
             <p><b>Author: {author} </b></p>
-            <p>{content}</p>
+        <p>{content}</p>    
         </div>
     ))
-  )
-       
-  
+  )}
+  </>
         )
-        
         }
         
      
