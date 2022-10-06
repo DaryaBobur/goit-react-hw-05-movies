@@ -1,25 +1,27 @@
-import { Outlet } from "react-router-dom";
+
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import AppBar from "components/AppBar/AppBar";
 import FormSearchMovies from "components/FormSearchMovies/FormSearchMovies";
 import { getSearchQueryMovies } from "services/getSearchMovies";
 import MoviesList from "components/MoviesList/MoviesList";
 
 import Loader from "components/Loader/Loader";
-import MovieDetails from "pages/MovieDetails/MovieDetails";
+
 
 const Movies = () => {
 
     const [items, setItems] = useState([]);
-    const [query, setQuery] = useState('');
-    const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+
+      const [searchParams, setSearchParams] = useSearchParams();
+      const query = searchParams.get("query");
+
   
     const onChangeQuery = query => {
-      setQuery(query);
-      setPage(1);
-      setItems([]);
+     setSearchParams({query : query});
+       setItems([]);
     };
 
     useEffect(() => {
@@ -32,7 +34,7 @@ const Movies = () => {
           setIsLoading(true);
     
           try {
-            const data = await getSearchQueryMovies();
+            const data = await getSearchQueryMovies({query});
             setItems(data)
             } 
             catch (error) {
@@ -45,7 +47,7 @@ const Movies = () => {
     
         getSearchMovies();
     
-      }, [page, query])
+      }, [query])
     
 
     
@@ -57,10 +59,10 @@ const Movies = () => {
         <FormSearchMovies onSubmit={onChangeQuery}/>
         {items.length !== 0 && <MoviesList items={items} />}
 
-         <MovieDetails/>
+        
         {isLoading && <Loader/>}
         {error && <p>Please try again later!</p>}
-        <Outlet/>
+    
         </>
     )
 }
