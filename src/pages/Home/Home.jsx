@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import AppBar from "components/AppBar/AppBar";
 import Loader from "components/Loader/Loader";
 import { getSearchTrendingMovies } from "services/getSearchMovies";
-import MoviesListTrending from "components/MoviesListTrending/MoviesListTrending";
+import MoviesList from "components/MoviesList/MoviesList";
 import MovieDetails from "pages/MovieDetails/MovieDetails";
 
 const Home = () => {
@@ -34,11 +34,11 @@ const Home = () => {
             fetchTrendingMovies();
     }, [])
 
-console.log(items.data)
+
     return (
         <>
             <AppBar/>
-            {items.length !== 0 && <MoviesListTrending items={items}/>}
+            {items.length !== 0 && <MoviesList items={items}/>}
 
             {isLoading && <Loader/>}
             {error && <p>Please try again later!</p>}
