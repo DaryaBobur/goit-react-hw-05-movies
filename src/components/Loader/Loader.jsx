@@ -4,8 +4,8 @@ const Loader = () => {
     return (    
         <Vortex 
             visible={true} 
-            height="150" 
-            width="150"
+            height="100" 
+            width="100"
             color='black'
             wrapperStyle={{marginRight: 'auto',
             marginLeft: 'auto'}}
