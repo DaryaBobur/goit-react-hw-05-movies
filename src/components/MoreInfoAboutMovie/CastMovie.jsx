@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCastMovie } from 'services/getSearchMovies';
-
+import img from '../img/imageNotFound.png';
 
 
 const CastMovie = () => {
 const [cast, setCast] = useState(null);
+
 
 const {movieId} = useParams();
 console.log(movieId)
@@ -33,7 +34,7 @@ cast && (
 {cast.data.cast.map(({name, character, profile_path, id}) => (
 
 <li key={id}>
-   <img src={`${IMG_BASE_URL}${profile_path}`} alt={name}/>
+    {profile_path ? <img src={`${IMG_BASE_URL}${profile_path}`} alt={name}/> : <img src={img} alt={name}/>}
     <p>{name}</p>
     <p><b>Character:</b> {character}</p>
 
