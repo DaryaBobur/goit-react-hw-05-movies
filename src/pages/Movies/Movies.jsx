@@ -8,9 +8,6 @@ import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 import Loader from "components/Loader/Loader";
 import MovieDetails from "pages/MovieDetails/MovieDetails";
 
-
-
-
 const Movies = () => {
 
     const [items, setItems] = useState([]);
@@ -28,16 +25,16 @@ const Movies = () => {
     useEffect(() => {
   
         const getSearchMovies = async () => {
-          const params = { query: query, page };
+
           if(!query) {
             return;
           }      
           setIsLoading(true);
     
           try {
-            const data = await getSearchQueryMovies(params);
+            const data = await getSearchQueryMovies();
             console.log(data)
-            setItems(prev => [...prev, ...data.data.results])
+            setItems(data)
             } 
             catch (error) {
               setError(error);
@@ -51,9 +48,7 @@ const Movies = () => {
     
       }, [page, query])
     
-      const loadMore =() => {
-        setPage((prevPage) => prevPage + 1)
-      }
+
     
 
 
@@ -62,7 +57,7 @@ const Movies = () => {
         <AppBar/>
         <FormSearchMovies onSubmit={onChangeQuery}/>
         {items.length !== 0 && <MoviesList items={items} />}
-        {items.length !== 0 && <ButtonLoadMore onClick={loadMore} />}
+
          <MovieDetails/>
         {isLoading && <Loader/>}
         {error && <p>Please try again later!</p>}
