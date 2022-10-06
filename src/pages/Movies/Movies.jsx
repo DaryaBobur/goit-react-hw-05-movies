@@ -4,7 +4,7 @@ import AppBar from "components/AppBar/AppBar";
 import FormSearchMovies from "components/FormSearchMovies/FormSearchMovies";
 import { getSearchQueryMovies } from "services/getSearchMovies";
 import MoviesList from "components/MoviesListTrending/MoviesListTrending";
-import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
+
 import Loader from "components/Loader/Loader";
 import MovieDetails from "pages/MovieDetails/MovieDetails";
 
@@ -33,7 +33,6 @@ const Movies = () => {
     
           try {
             const data = await getSearchQueryMovies();
-            console.log(data)
             setItems(data)
             } 
             catch (error) {
