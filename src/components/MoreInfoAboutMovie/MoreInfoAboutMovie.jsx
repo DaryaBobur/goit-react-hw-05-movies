@@ -1,12 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const MoreInfoAboutMovie = () => {
+    const location = useLocation();
+    const from = location.state?.from ?? "/movies";
 return (
     <>
         <h2>Additional information</h2>
         <ul>
-        <li><NavLink to="cast">Cast</NavLink></li>
-        <li><NavLink to="reviews">Reviews</NavLink></li>
+        <li><NavLink state={{from}} to="cast">Cast</NavLink></li>
+        <li><NavLink state={{from}} to="reviews">Reviews</NavLink></li>
         </ul>
     </>
 )
