@@ -1,29 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Outlet  } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { useParams, useNavigate, Outlet, useLocation  } from 'react-router-dom';
 import { getMoviesDetails } from 'services/getSearchMovies';
 import MoreInfoAboutMovie from 'components/MoreInfoAboutMovie/MoreInfoAboutMovie';
-
+import Loader from "components/Loader/Loader";
 const MovieDetails = () => {
     
 const [movie, setMovie] = useState(null);
 const [error, setError] = useState(null);
+const [isLoading, setIsLoading] = useState(false);
 const { movieId } = useParams();
 const navigate = useNavigate();
 
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
+const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const location = useLocation();
+const from = location.state?.from ?? "/movies";
 useEffect(()=> {
    
     const fetchMovie = async () => {
         if(!movieId) {
             return;
         }
-
+        setIsLoading(true);
         try {
           const data = await getMoviesDetails({movieId});
           setMovie(data);
         } catch (error) {
             setError(error)
+        }
+        finally {
+            setIsLoading(false);
         }
     }
 
@@ -31,12 +37,13 @@ useEffect(()=> {
 
 }, [movieId])
 
-const goBack =() => navigate("/");
+const goBack =() => navigate(from);
 
 return (
     <>
-{movieId && <button type="button" onClick={goBack}>Go back</button>}
 
+{movie && <button type="button" onClick={goBack}>Go back</button>}
+{isLoading && <Loader/>}
 {movie && (
 
     <div>
@@ -52,9 +59,14 @@ return (
     </div>
 )}
 
-{movieId && <MoreInfoAboutMovie />}
+
+
+{movie && <MoreInfoAboutMovie/>}
 {error && <p>Please try again later!</p>}
-<Outlet/>
+
+<Suspense fallback={<Loader/>}>
+<Outlet />
+</Suspense>
 </>
 )
 
