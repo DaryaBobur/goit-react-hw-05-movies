@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import AppBar from "components/AppBar/AppBar";
 import FormSearchMovies from "components/FormSearchMovies/FormSearchMovies";
 import { getSearchQueryMovies } from "services/getSearchMovies";
-import MoviesList from "components/MoviesListTrending/MoviesListTrending";
+import MoviesList from "components/MoviesList/MoviesList";
 
 import Loader from "components/Loader/Loader";
 import MovieDetails from "pages/MovieDetails/MovieDetails";
