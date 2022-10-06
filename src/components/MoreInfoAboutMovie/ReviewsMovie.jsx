@@ -26,7 +26,7 @@ const ReviewsMovie = () => {
 
         return (
   review && (
-    review.data.results.map(({author, content, id}) => (
+    review.data.results.map(({author, content}) => (
         <div key={author}>
             <p><b>Author: {author} </b></p>
             <p>{content}</p>
