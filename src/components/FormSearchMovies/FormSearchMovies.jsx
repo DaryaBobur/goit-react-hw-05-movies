@@ -1,15 +1,12 @@
 import { useState } from 'react';
-
 import PropTypes from 'prop-types';
-
 import { toast } from 'react-toastify';
-
 import { FaSearch } from "react-icons/fa";
+import { SearchForm, SearchFormInput, ButtonSearchMovie } from './FormSearchMovie';
+
 
 const FormSearchMovies = ({ onSubmit }) => {
-
   const [searchQuery, setSearchQuery] = useState('');
-
 
   const handleSearchQuery = e => {
     setSearchQuery(e.currentTarget.value.toLowerCase().trim());
@@ -33,22 +30,21 @@ const FormSearchMovies = ({ onSubmit }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <SearchForm onSubmit={handleSubmit}>
       
-        <button type="submit">
-          <FaSearch fontSize={18}/>
-        </button>
-      
-        <input
+        <SearchFormInput
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movie"
             onChange={handleSearchQuery}
             name="searchQuery"
             value={searchQuery}
          />
-      </form>
+          <ButtonSearchMovie type="submit">
+            <FaSearch fontSize={16}/>
+          </ButtonSearchMovie>
+      </SearchForm>
     </>
   )
 }
