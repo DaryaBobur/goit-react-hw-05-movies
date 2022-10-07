@@ -32,11 +32,6 @@ export const Poster = styled.img`
 
 export const Genres = styled.div`
     display: flex;
-
-    p {
-        :not(:last-child) {
-            margin-right: 10px;
-        }
-    }
+    gap: 10px; 
 
 `
