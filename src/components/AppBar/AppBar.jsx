@@ -1,17 +1,31 @@
-import { NavLink } from "react-router-dom";
+import { StyledLink, NavItem, NavList, Header } from "./AppBarStyled";
 
 const navItems = [
-    { href: '/', text: 'Home' },
-    { href: '/movies', text: 'Movies' },
+  { href: '/', text: 'Home' },
+  { href: '/movies', text: 'Movies' },
 ];
 
 const AppBar = () => {
     return (
-        <div>
-            {navItems.map(({ href, text }) => (
-                <NavLink to={href} key={href}>{text}</NavLink>
-            ))}
-        </div>
+        <Header>
+            <NavList>
+                {navItems.map(({ href, text }) => {
+                    if(href.includes("/movies")) {
+                        return (
+                            <NavItem key={href}>
+                                <StyledLink to={href}>{text}</StyledLink>
+                            </NavItem>
+                        )
+                    }    
+
+                    return (
+                        <NavItem key={href}>
+                            <StyledLink to={href} end>{text}</StyledLink>
+                        </NavItem>
+                    )
+                })}
+            </NavList>
+        </Header>
     )
 }
 
